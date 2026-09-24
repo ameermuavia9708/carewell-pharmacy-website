@@ -1,1 +1,972 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CareWell Pharmacy — Pharmacy Management Software</title>
+
+  <meta
+    name="description"
+    content="CareWell Pharmacy is a modern pharmacy management solution for medicines, inventory, sales, customers, purchases and secure cloud backup."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      background: #f7faf8;
+      color: #17352a;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid #e4ece7;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 20px;
+      color: #155d3c;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      background: #176b46;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(23, 107, 70, 0.18);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #49675a;
+    }
+
+    nav a:hover {
+      color: #176b46;
+    }
+
+    .nav-button {
+      background: #176b46;
+      color: white;
+      padding: 11px 18px;
+      border-radius: 9px;
+    }
+
+    .nav-button:hover {
+      color: white;
+      background: #105636;
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 90px 0 80px;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(208, 235, 220, 0.8), transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, #f4faf6 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e8f5ed;
+      color: #176b46;
+      padding: 7px 13px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 68px);
+      line-height: 1.06;
+      letter-spacing: -2px;
+      color: #123c2b;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: #176b46;
+    }
+
+    .hero p {
+      max-width: 650px;
+      font-size: 18px;
+      color: #61766c;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .primary-button,
+    .secondary-button {
+      padding: 13px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .primary-button {
+      background: #176b46;
+      color: white;
+      box-shadow: 0 10px 24px rgba(23, 107, 70, 0.18);
+    }
+
+    .primary-button:hover {
+      background: #105636;
+    }
+
+    .secondary-button {
+      background: white;
+      border: 1px solid #d7e4dd;
+      color: #315846;
+    }
+
+    .secondary-button:hover {
+      border-color: #176b46;
+    }
+
+    /* DASHBOARD PREVIEW */
+
+    .dashboard {
+      background: white;
+      border: 1px solid #dce9e1;
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 25px 70px rgba(29, 69, 51, 0.13);
+    }
+
+    .dashboard-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #edf2ef;
+      margin-bottom: 18px;
+    }
+
+    .dashboard-title {
+      font-weight: 800;
+      color: #173f2d;
+    }
+
+    .status {
+      background: #e8f7ee;
+      color: #197047;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .mini-card {
+      border: 1px solid #e8eeea;
+      border-radius: 12px;
+      padding: 15px;
+      background: #fbfdfc;
+    }
+
+    .mini-card small {
+      display: block;
+      color: #7b8d84;
+      font-size: 11px;
+      margin-bottom: 5px;
+    }
+
+    .mini-card strong {
+      font-size: 22px;
+      color: #1b4935;
+    }
+
+    .chart {
+      height: 125px;
+      border-radius: 13px;
+      background: linear-gradient(180deg, #f0f8f3, #fbfdfc);
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 18px;
+    }
+
+    .bar {
+      flex: 1;
+      background: #4a9a70;
+      border-radius: 5px 5px 2px 2px;
+      opacity: 0.8;
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 85px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 45px;
+    }
+
+    .section-heading h2 {
+      font-size: 38px;
+      line-height: 1.15;
+      color: #143d2c;
+      margin-bottom: 13px;
+    }
+
+    .section-heading p {
+      color: #6c7e75;
+      font-size: 16px;
+    }
+
+    .features {
+      background: white;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      padding: 26px;
+      border: 1px solid #e2ebe6;
+      border-radius: 16px;
+      background: #ffffff;
+      transition: 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: #c6dbcf;
+      box-shadow: 0 15px 35px rgba(30, 75, 54, 0.08);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 13px;
+      background: #e9f6ee;
+      color: #176b46;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 23px;
+      margin-bottom: 17px;
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      color: #204a38;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      color: #718279;
+      font-size: 14px;
+    }
+
+    /* BACKUP */
+
+    .backup {
+      background: #eef7f1;
+    }
+
+    .backup-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid #dcebe2;
+      border-radius: 20px;
+      padding: 45px;
+    }
+
+    .backup-box h2 {
+      font-size: 36px;
+      color: #143d2c;
+      margin-bottom: 14px;
+    }
+
+    .backup-box p {
+      color: #687b72;
+      margin-bottom: 20px;
+    }
+
+    .backup-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .backup-list li {
+      color: #315846;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .backup-list li::before {
+      content: "✓";
+      color: #176b46;
+      font-weight: 900;
+      margin-right: 9px;
+    }
+
+    .cloud-card {
+      min-height: 270px;
+      border-radius: 18px;
+      background: #f5faf7;
+      border: 1px solid #dfece4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .cloud-icon {
+      font-size: 65px;
+      margin-bottom: 12px;
+    }
+
+    .cloud-card h3 {
+      color: #1c4c37;
+      margin-bottom: 7px;
+    }
+
+    .cloud-card p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* CTA */
+
+    .cta {
+      background: #176b46;
+      color: white;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      max-width: 650px;
+      margin: 0 auto 25px;
+      color: #dcefe4;
+    }
+
+    .cta .secondary-button {
+      border: none;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #103526;
+      color: #cbded3;
+      padding: 45px 0 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 30px;
+    }
+
+    .footer-brand {
+      color: white;
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .footer-description {
+      max-width: 400px;
+      color: #a9c1b5;
+      font-size: 14px;
+    }
+
+    footer h4 {
+      color: white;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    footer a {
+      display: block;
+      color: #a9c1b5;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      font-size: 12px;
+      color: #91aa9e;
+      text-align: center;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 850px) {
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 60px 0;
+      }
+
+      .hero-grid,
+      .backup-box {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .hero h1 {
+        font-size: 43px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      section {
+        padding: 65px 0;
+      }
+
+      .section-heading h2 {
+        font-size: 30px;
+      }
+
+      .feature-grid,
+      .dashboard-cards,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .backup-box {
+        padding: 28px;
+      }
+
+      .backup-box h2 {
+        font-size: 30px;
+      }
+
+      .cta h2 {
+        font-size: 31px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+    <div class="container nav">
+
+      <a href="#" class="brand">
+        <div class="brand-icon">C</div>
+        <span>CareWell Pharmacy</span>
+      </a>
+
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#backup">Backup</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-button">Get Started</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="container hero-grid">
+
+        <div>
+
+          <div class="badge">
+            ✦ Modern Pharmacy Management
+          </div>
+
+          <h1>
+            Manage your pharmacy
+            <span>with confidence.</span>
+          </h1>
+
+          <p>
+            CareWell Pharmacy is a modern pharmacy management solution
+            designed to help pharmacies manage medicines, inventory,
+            sales, customers, purchases and secure data backup from one place.
+          </p>
+
+          <div class="hero-buttons">
+
+            <a href="#features" class="primary-button">
+              Explore Features
+            </a>
+
+            <a href="#backup" class="secondary-button">
+              Secure Cloud Backup
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- DASHBOARD PREVIEW -->
+
+        <div class="dashboard">
+
+          <div class="dashboard-top">
+
+            <div class="dashboard-title">
+              CareWell Dashboard
+            </div>
+
+            <div class="status">
+              ● System Ready
+            </div>
+
+          </div>
+
+          <div class="dashboard-cards">
+
+            <div class="mini-card">
+              <small>Total Medicines</small>
+              <strong>1,248</strong>
+            </div>
+
+            <div class="mini-card">
+              <small>Stock Units</small>
+              <strong>8,462</strong>
+            </div>
+
+            <div class="mini-card">
+              <small>Today's Sales</small>
+              <strong>Rs. 48K</strong>
+            </div>
+
+            <div class="mini-card">
+              <small>Low Stock</small>
+              <strong>18</strong>
+            </div>
+
+          </div>
+
+          <div class="chart">
+
+            <div class="bar" style="height:35%;"></div>
+            <div class="bar" style="height:50%;"></div>
+            <div class="bar" style="height:42%;"></div>
+            <div class="bar" style="height:70%;"></div>
+            <div class="bar" style="height:58%;"></div>
+            <div class="bar" style="height:85%;"></div>
+            <div class="bar" style="height:75%;"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+
+    <section class="features" id="features">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <h2>Everything your pharmacy needs</h2>
+
+          <p>
+            Designed to simplify everyday pharmacy operations
+            while keeping important business information organized.
+          </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+          <div class="feature-card">
+
+            <div class="feature-icon">💊</div>
+
+            <h3>Medicine Management</h3>
+
+            <p>
+              Manage medicines, categories, companies, batches,
+              expiry dates, prices, barcodes and stock levels.
+            </p>
+
+          </div>
+
+
+          <div class="feature-card">
+
+            <div class="feature-icon">📦</div>
+
+            <h3>Inventory Control</h3>
+
+            <p>
+              Monitor stock levels, low-stock medicines,
+              stock adjustments and inventory history.
+            </p>
+
+          </div>
+
+
+          <div class="feature-card">
+
+            <div class="feature-icon">🧾</div>
+
+            <h3>Point of Sale</h3>
+
+            <p>
+              Manage pharmacy sales, customers, payments,
+              receipts and transaction records.
+            </p>
+
+          </div>
+
+
+          <div class="feature-card">
+
+            <div class="feature-icon">👥</div>
+
+            <h3>Customer Management</h3>
+
+            <p>
+              Keep customer information and transaction history
+              organized for better pharmacy service.
+            </p>
+
+          </div>
+
+
+          <div class="feature-card">
+
+            <div class="feature-icon">🏢</div>
+
+            <h3>Purchases & Suppliers</h3>
+
+            <p>
+              Track suppliers, purchases, payments and purchase
+              returns in one organized system.
+            </p>
+
+          </div>
+
+
+          <div class="feature-card">
+
+            <div class="feature-icon">📊</div>
+
+            <h3>Business Records</h3>
+
+            <p>
+              Keep important pharmacy financial and operational
+              records organized and easy to review.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- BACKUP -->
+
+    <section class="backup" id="backup">
+
+      <div class="container">
+
+        <div class="backup-box">
+
+          <div>
+
+            <div class="badge">
+              🔐 Data Protection
+            </div>
+
+            <h2>
+              Keep your pharmacy data safe.
+            </h2>
+
+            <p>
+              CareWell is designed with backup and recovery in mind.
+              Connect your own Google account and keep your pharmacy
+              backup safely stored in Google Drive.
+            </p>
+
+            <ul class="backup-list">
+
+              <li>Google Drive cloud backup</li>
+              <li>Backup versions and history</li>
+              <li>Restore pharmacy data</li>
+              <li>Backup your own pharmacy account</li>
+              <li>Secure OAuth connection</li>
+
+            </ul>
+
+          </div>
+
+
+          <div class="cloud-card">
+
+            <div>
+
+              <div class="cloud-icon">☁️</div>
+
+              <h3>CareWell Cloud Backup</h3>
+
+              <p>
+                Your pharmacy data, backed up when you need it.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <h2>Built for modern pharmacies</h2>
+
+          <p>
+            CareWell Pharmacy brings essential pharmacy management
+            tools together in one clean and easy-to-use system.
+            The platform is designed to grow with the needs of
+            independent pharmacies and pharmacy businesses.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta" id="contact">
+
+      <div class="container">
+
+        <h2>CareWell Pharmacy</h2>
+
+        <p>
+          A simple, organized and modern approach to pharmacy management.
+        </p>
+
+        <a
+          href="mailto:ameermuavia1155@gmail.com"
+          class="secondary-button"
+        >
+          Contact Support
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+
+          <div class="footer-brand">
+            CareWell Pharmacy
+          </div>
+
+          <p class="footer-description">
+            Modern pharmacy management software for medicines,
+            inventory, sales, customers, purchases and secure backup.
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <h4>Product</h4>
+
+          <a href="#features">Features</a>
+          <a href="#backup">Google Drive Backup</a>
+          <a href="#about">About CareWell</a>
+
+        </div>
+
+
+        <div>
+
+          <h4>Legal & Support</h4>
+
+          <a href="privacy-policy.html">
+            Privacy Policy
+          </a>
+
+          <a href="terms.html">
+            Terms of Service
+          </a>
+
+          <a href="mailto:ameermuavia1155@gmail.com">
+            Contact Support
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="copyright">
+        © 2026 CareWell Pharmacy. All rights reserved.
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
